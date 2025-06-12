@@ -1,0 +1,26 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  scrape_protocols:
+    - OpenMetricsText1.0.0
+    - OpenMetricsText0.0.1
+    - PrometheusText0.0.4
+
+alerting:
+  alertmanagers:
+    - timeout: 10s
+    - static_configs:
+        - targets: ["${ALERTMANAGER_TARGET:-alertmanager:9093}"]
+
+rule_files:
+  - /etc/prometheus/rules/*.yaml
+
+scrape_configs:
+  - job_name: ssv
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - "${SSV_NODE}:15000"
+    relabel_configs:
+      - target_label: pod
+        replacement: ssv-node-1
