@@ -22,7 +22,7 @@ services:
       - ${PROM_SERVER_PORT:-9090}:9090
     volumes:
       - prometheus-volume:/prometheus
-      - ./prometheus/prometheus.yaml:/etc/prometheus/prometheus.yaml
+      - ./prometheus/prometheus.yml:/prometheus/prometheus.yml
       - ./prometheus/rules:/etc/prometheus/rules
     command:
       - --web.enable-lifecycle
