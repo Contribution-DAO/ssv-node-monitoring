@@ -2,7 +2,7 @@ services:
   grafana:
     image: grafana/grafana:latest
     container_name: ssv-grafana
-    restsart: unless-stopped
+    restart: unless-stopped
     volumes:
       - grafana-volume:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning
